@@ -1,0 +1,18 @@
+A Greasemonkey script to mark positions on a page and to scroll to them.
+
+Usage
+    - Change keyMark variable. Control + this key to save a position.
+    - Change keyGoto variable. Control + this key to scroll to a position.
+    - Change timeDeltaIndex. Time window you have to press a number where you
+      want to save a position or to scroll to position.
+    - To save a position, press control + keyMark key and then a number.
+    - To scroll to a previously marked position, press control + keyGoto key
+      and then a number.
+
+Todo
+    - Change this to a Web Extension.
+    - Because of the above, settings are easier to do, so make them
+      configurable.
+    - Just save positions to a limited length LIFO and ditch the numbers
+      altogether? A one or two positions marked is probably most common and
+      it's easier to use.
