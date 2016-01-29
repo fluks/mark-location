@@ -31,71 +31,6 @@ var clearGotoPressed = function() {
     console.log('goto cleared: ' + gotoPressed);
 };
 
-/** Scroll window in a such way that the node's top is just under window's top.
- * @param {Node} node - The node to where the window is scrolled to.
- */
-var scrollToNode = function(node) {
-    if (!node) {
-        console.log("Node is gone!");
-        return;
-    }
-
-    var oldColor = node.style.backgroundColor;
-    node.style.backgroundColor = 'red';
-    window.setTimeout(function() {
-        node.style.backgroundColor = oldColor;
-    }, 2000);
-
-    var nodeRect = node.getBoundingClientRect();
-    window.scrollTo(0, nodeRect.top);
-    // el.wrappedJSObject.scrollIntoView()
-
-    /*console.log('about to scroll, node.top at ' + nodeRect.top);*/
-    /*var scrollUpOrDown = nodeRect.top < 0 ? -1 : 1;*/
-    /*var i = 0;*/
-    /*var nodeTopLast = undefined;*/
-    /*while ((nodeRect.top < 0 || nodeRect.top > 100) && i < 1000) {*/
-    /*window.scrollBy(0, scrollUpOrDown * 10);*/
-    /*if (nodeTopLast !== undefined && nodeTopLast === nodeRect.top) {*/
-    /*console.log("node didn't move");*/
-    /*break;*/
-    /*}*/
-    /*nodeTopLast = nodeRect.top;*/
-
-    /*console.log('scrolling window ' + i + ' nth time, node.top at ' + nodeRect.top);*/
-    /*++i;*/
-    /*}*/
-};
-
-/** Find the topmost node which is visible in window. The top attribute of
- * the node's bounding rectangle(BR) must be <= window's BR.top and
- * the difference smallest of all nodes.
- * @return {Node} Topmost Node.
- */
-var topmostNode = function() {
-    // window.pageYOffset! Add handler to notice if window's size changes.
-    var allNodes = document.getElementsByTagName('*');
-    var windowBottom = window.innerHeight;
-
-    for (var i = 0; i < allNodes.length; i++) {
-        var node = allNodes[i];
-        var nodeRect = node.getBoundingClientRect();
-        if (nodeRect.top > 0 && nodeRect.top < 50) {
-            console.log(node.nodeName + ': ' + nodeRect.top + ' ' + nodeRect.bottom);
-            var oldColor = node.style.backgroundColor;
-            node.style.backgroundColor = 'blue';
-            window.setTimeout(function() {
-                node.style.backgroundColor = oldColor;
-            }, 2000);
-
-            return node;
-        }
-    }
-    console.log('No topmost node found');
-
-    return null;
-};
-
 var keydownHandler = function(e) {
     if (e.key === KEY_MARK && e.ctrlKey) {
         console.log('mark pressed');
@@ -126,7 +61,7 @@ var keydownHandler = function(e) {
             window.clearTimeout(markTimeout);
             markPressed = false;
 
-            marks[i] = topmostNode();
+            marks[i] = { x: window.pageXOffset, y: window.pageYOffset };
         }
         else if (gotoPressed) {
             console.log('goto ' + i);
@@ -134,7 +69,11 @@ var keydownHandler = function(e) {
             window.clearTimeout(gotoTimeout);
             gotoPressed = false;
 
-            scrollToNode(marks[i]);
+            var offsets = marks[i];
+            if (offsets)
+                window.scrollTo(offsets.x, offsets.y);
+            else
+                console.log('no mark set for index ' + i);
         }
     }
 };
