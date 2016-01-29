@@ -8,49 +8,49 @@
 // @author         fluks.github@gmail.com
 // ==/UserScript==
 
-const
-    KEY_MARK = 'å',
-    KEY_GOTO = 'ä',
+/* Usage:
+ *
+ * Press ctrl + keyMark key to mark a position on a page and after that before
+ * timeDeltaIndex ms, press a number where to store that position.
+ *
+ * To go to a saved positiion press ctrl + keyGoto key and a number where you
+ * previously saved a position.
+ *
+ * Change keyMark, keyGoto and timeDeltaIndex values as you wish.
+ */
+
+var
+    keyMark = 'å',
+    keyGoto = 'ä',
     // Time window in ms after pressing a mark or goto key to register
     // a number key press.
-    TIME_DELTA_KEY = 500;
-var
+    timeDeltaIndex = 500;
     marks = [],
     markPressed = false,
     gotoPressed = false,
     markTimeout = undefined,
     gotoTimeout = undefined;
 
-var clearMarkPressed = function() {
-    markPressed = false;
-    console.log('mark cleared: ' + markPressed);
-};
-
-var clearGotoPressed = function() {
-    gotoPressed = false;
-    console.log('goto cleared: ' + gotoPressed);
-};
-
 var keydownHandler = function(e) {
-    if (e.key === KEY_MARK && e.ctrlKey) {
-        console.log('mark pressed');
-
+    if (e.key === keyMark && e.ctrlKey) {
         window.clearTimeout(markTimeout);
         window.clearTimeout(gotoTimeout);
         gotoPressed = false;
 
         markPressed = true;
-        markTimeout = window.setTimeout(clearMarkPressed, TIME_DELTA_KEY);
+        markTimeout = window.setTimeout(function() {
+            markPressed = false;
+        }, timeDeltaIndex);
     }
-    else if (e.key === KEY_GOTO && e.ctrlKey) {
-        console.log('goto pressed');
-
+    else if (e.key === keyGoto && e.ctrlKey) {
         window.clearTimeout(markTimeout);
         window.clearTimeout(gotoTimeout);
         markPressed = false;
 
         gotoPressed = true;
-        gotoTimeout = window.setTimeout(clearGotoPressed, TIME_DELTA_KEY);
+        gotoTimeout = window.setTimeout(function() {
+            gotoPressed = false;
+        }, timeDeltaIndex);
     }
     else if ('1234567890'.includes(e.key)) {
         var i = parseInt(e.key);
