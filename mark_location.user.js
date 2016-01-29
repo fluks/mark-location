@@ -5,6 +5,7 @@
 // @version        0.0.1
 // @include        *
 // @exclude        
+// @updateURL      https://github.com/fluks/mark-location/raw/master/mark_location.user.js
 // @author         fluks.github@gmail.com
 // ==/UserScript==
 
