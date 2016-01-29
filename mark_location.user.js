@@ -56,24 +56,18 @@ var keydownHandler = function(e) {
         var i = parseInt(e.key);
 
         if (markPressed) {
-            console.log('mark ' + i);
-
             window.clearTimeout(markTimeout);
             markPressed = false;
 
             marks[i] = { x: window.pageXOffset, y: window.pageYOffset };
         }
         else if (gotoPressed) {
-            console.log('goto ' + i);
-
             window.clearTimeout(gotoTimeout);
             gotoPressed = false;
 
             var offsets = marks[i];
             if (offsets)
                 window.scrollTo(offsets.x, offsets.y);
-            else
-                console.log('no mark set for index ' + i);
         }
     }
 };
