@@ -78,5 +78,4 @@ var keydownHandler = function(e) {
     }
 };
 
-// Added true.
-window.addEventListener('keydown', keydownHandler, true);
+window.addEventListener('keydown', keydownHandler);
