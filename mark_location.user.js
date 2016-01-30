@@ -2,7 +2,7 @@
 // @name           MarkLocation
 // @namespace      fluks
 // @description    Mark and scroll to location on a page.
-// @version        0.0.1
+// @version        0.0.2
 // @include        *
 // @exclude        
 // @updateURL      https://github.com/fluks/mark-location/raw/master/mark_location.user.js
