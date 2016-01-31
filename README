@@ -3,6 +3,10 @@ A userscript to mark positions on a page and to scroll to them.
 Usage
     - Change keyMark variable. Control + this key to save a position.
     - Change keyGoto variable. Control + this key to scroll to a position.
+      (Test to see what keycodes your system(browser, keyboard layout) emits,
+      follow this link:
+        https://jsbin.com/xugewaqoza/edit?html,js,output
+      Replace the numbers in variables by the keycode number.)
     - Change timeDeltaIndex. Time window you have to press a number where you
       want to save a position or to scroll to position.
     - To save a position, press control + keyMark key and then a number.
