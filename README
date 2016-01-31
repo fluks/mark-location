@@ -1,4 +1,4 @@
-A Greasemonkey script to mark positions on a page and to scroll to them.
+A userscript to mark positions on a page and to scroll to them.
 
 Usage
     - Change keyMark variable. Control + this key to save a position.
@@ -8,6 +8,11 @@ Usage
     - To save a position, press control + keyMark key and then a number.
     - To scroll to a previously marked position, press control + keyGoto key
       and then a number.
+
+Supported Browser
+    I have tested the script works on:
+        - Firefox
+        - Chromium
 
 Todo
     - Change this to a Web Extension.
